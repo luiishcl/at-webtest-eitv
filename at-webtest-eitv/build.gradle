@@ -22,7 +22,7 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
 
     // WebDriverManager
-    implementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
 
     // Hamcrest (asserts)
     implementation 'org.hamcrest:hamcrest:3.0-rc1'
