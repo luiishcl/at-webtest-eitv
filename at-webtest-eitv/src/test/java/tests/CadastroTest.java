@@ -15,8 +15,8 @@ public class CadastroTest {
     private static final Logger logger = LoggerFactory.getLogger(CadastroTest.class);
 
     //Variaveis do cadastro
-    String nome = "Perrito Kin";
-    String email = "email_06@teste.com.br";
+    String nome = "Perrito Kan";
+    String email = "email_07@teste.com.br";
     String senha = "123Pass@";
     String cadastroTitulo = "CRIAR USUÁRIO";
     String msgEmailErro = "não é válido";
