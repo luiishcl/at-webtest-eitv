@@ -1,5 +1,4 @@
 package pages;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -70,7 +69,7 @@ public class CadastroPage {
         driver.findElement(campoPreenchimentoPassConf).sendKeys(senhaUsuarioConf);
     }
 
-    public void checkboxCadastro() throws InterruptedException {
+    public void checkboxCadastro(){
 
         driver.findElement(checkBoxTerms).click();
         driver.findElement(checkBoxPrivacy).click();
