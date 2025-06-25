@@ -53,8 +53,7 @@ public class CadastroTest {
         cadastroPage.checkboxCadastro();
 
         //Clicar em Criar usuario
-
-
+        cadastroPage.clicarRegistrar();
     }
 
 }

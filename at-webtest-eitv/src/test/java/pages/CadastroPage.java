@@ -60,6 +60,10 @@ public class CadastroPage {
         driver.findElement(checkBoxPrivacy).click();
     }
 
+    public void clicarRegistrar(){
+        driver.findElement(botaoSubmeter);
+    }
+
 
     // CONSTRUTOR!
     public CadastroPage (WebDriver driver) {
