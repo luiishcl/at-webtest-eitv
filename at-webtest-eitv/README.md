@@ -1,7 +1,3 @@
-# Projeto de Automação de Login e Cadastro de usuario
-
-## Esse projeto de automação utiliza Java, Gradle, Junit5, Selenium e Hamcrest
-
 # 🧪 Projeto de Testes Automatizados – EITV
 
 Este repositório contém um conjunto de testes automatizados utilizando **Java**, **Selenium WebDriver** e **JUnit 5**, com estrutura baseada em **Page Object Model**. O projeto cobre cenários de teste da aplicação EITV, com foco nas funcionalidades de **login** e **cadastro de usuários**.
