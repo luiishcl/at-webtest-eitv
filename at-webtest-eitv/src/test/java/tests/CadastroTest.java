@@ -1,9 +1,6 @@
 package tests;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.slf4j.Logger;
@@ -18,33 +15,34 @@ public class CadastroTest {
     private static final Logger logger = LoggerFactory.getLogger(CadastroTest.class);
 
     //Variaveis do cadastro
-    String nome = "Perrito Test";
-    String email = "email_04@teste.com.br";
+    String nome = "Perrito Frozen";
+    String email = "email_05@teste.com.br";
     String senha = "123Pass@";
+    String cadastroTitulo = "CRIAR USUÁRIO";
 
-
-    @BeforeAll
-    public static void Setup(){
+    @BeforeEach
+    public void setup(){
         driver = new EdgeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10));
         driver.manage().window().maximize();
+        driver.get(baseUrlCadastro);
     }
 
-    @AfterAll
-    public static void TearDown(){
-        driver.close();
+    @AfterEach
+    public void tearDown(){
+        driver.quit();
     }
 
     @Test
     @DisplayName("Quando preencher o cadastro com as informações então cria um novo usuario.")
     public void CriarUsuario() throws InterruptedException {
 
-
-        //Acesso a pagina Cadastro
-        driver.get(baseUrlCadastro);
-
         //Instanciar o page objects
         CadastroPage cadastroPage = new CadastroPage(driver);
+
+        //Titulo da pagina
+        cadastroPage.verificarTituloCadastro(cadastroTitulo);
+        logger.info("Validação do título da página de Cadastro concluída com sucesso.");
 
         //Preencher campos
         cadastroPage.insereNome(nome);

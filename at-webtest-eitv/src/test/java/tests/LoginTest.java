@@ -1,9 +1,6 @@
 package tests;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.slf4j.Logger;
@@ -22,29 +19,33 @@ public class LoginTest {
     //Variaveis do Login
     String email = "luishchagas@gmail.com";
     String senha = "123Pass@";
+    String loginTitulo = "ENTRAR";
+    String loginAlerta = "Verifique os dados informados.";
 
 
-    @BeforeAll
-    public static void Setup(){
+    @BeforeEach
+    public void setup(){
         driver = new EdgeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10));
         driver.manage().window().maximize();
+        driver.get(baseUrlAcesso);
     }
 
-    @AfterAll
-    public static void TearDown(){
-        //driver.close();
+    @AfterEach
+    public void tearDown(){
+        driver.quit();
     }
 
     @Test
     @DisplayName("Quando acessar a pagina de login, informar dados corretos de acesso, entao efetua login")
     public void EfetuaLogin(){
 
-        //Acesso a pagina
-        driver.get(baseUrlAcesso);
-
         //Instanciar Page objects
         LoginPage loginPage = new LoginPage(driver);
+
+        //Verifica titulo da Pagina de Login
+        loginPage.verificaTituloLogin(loginTitulo);
+        logger.info("Validação do título da página de Login concluída com sucesso.");
 
         //preencher usuario
         loginPage.preencheEmail(email);
@@ -62,6 +63,21 @@ public class LoginTest {
         loginPage.verificarSeLogado();
         logger.info("Login realizado com sucesso.");
 
+    }
+
+    @Test
+    @DisplayName("Quando tentar logar sem informar os campos, então exibe uma mensagem de alerta.")
+    public void LoginSemDados(){
+
+        //Instanciar Page objects
+        LoginPage loginPage = new LoginPage(driver);
+
+        //clicar login
+        loginPage.clicarEntrar();
+
+        //verificar mensagem alerta
+        loginPage.verificaMensagemAlertaLogin(loginAlerta);
+        logger.info("Mensagem de alerta verificada.");
     }
 }
 

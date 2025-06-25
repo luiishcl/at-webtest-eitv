@@ -49,6 +49,16 @@ public class CadastroPage {
         this.driver = driver;
     }
 
+    public void verificarTituloCadastro(String tituloEsperado){
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement titulo = wait.until(ExpectedConditions.visibilityOfElementLocated(tituloCadastro));
+
+        String tituloEncontrado = titulo.getText();
+
+        assertEquals (tituloEsperado, tituloEncontrado, "O título não confere com o esperado.");
+    }
+
     public void insereNome(String nomeUsuario){
         driver.findElement(campoPreenchimentoNome).sendKeys(nomeUsuario);
     }
@@ -91,9 +101,6 @@ public class CadastroPage {
 
         String mensagemEsperada = "Usuário \"" + nome + "\" criado. E-mail enviado com instruções de verificação.";
         String mensagemEncontrada = mensagemElement.getText();
-
-                //driver.findElement(mensagemCadastroSucesso).getText();
-
 
         assertEquals (mensagemEsperada, mensagemEncontrada, "Mensagem de sucesso não confere para o usuario: " + nome);
     }
