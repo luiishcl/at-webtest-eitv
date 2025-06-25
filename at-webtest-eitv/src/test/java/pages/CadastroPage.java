@@ -43,6 +43,18 @@ public class CadastroPage {
     //Composicao: "Usuário "Nome Usuario" criado. E-mail enviado com instruções de verificação."
     By mensagemCadastroSucesso = By.className("alert-success");
 
+    //Mensagem email invalido
+    //não é válido
+    By mensagemEmailInvalido = By.cssSelector("#new_user > div.form-group.has-error > span");
+
+    //Mensagem senha invalida
+    //é muito curto (mínimo: 6 caracteres)
+    By mensagemSenhaInvalida = By.cssSelector("#new_user > div:nth-child(6) > div > span");
+
+    //Mensagem Confirmação de Senha
+    //não pode ficar em branco, não está de acordo com a confirmação
+    By mensagemConfirmaSenhaInvalida = By.cssSelector("#new_user > div:nth-child(7) > div > span");
+
 
     // CONSTRUTOR!
     public CadastroPage (WebDriver driver) {
@@ -57,6 +69,19 @@ public class CadastroPage {
         String tituloEncontrado = titulo.getText();
 
         assertEquals (tituloEsperado, tituloEncontrado, "O título não confere com o esperado.");
+    }
+
+    public void verificarErrosCadastro(String msgEmailEsperado, String msgSenhaEsperado, String msgConfSenhaEsperado){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String emailErro = wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemEmailInvalido)).getText();
+        String senhaErro = wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemSenhaInvalida)).getText();
+        String confirmacaoErro = wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemConfirmaSenhaInvalida)).getText();
+
+        assertEquals(msgEmailEsperado, emailErro, "Mensagem de erro do e-mail inválido está incorreta.");
+        assertEquals(msgSenhaEsperado, senhaErro, "Mensagem de erro da senha inválida está incorreta.");
+        assertEquals(msgConfSenhaEsperado, confirmacaoErro, "Mensagem de erro da confirmação de senha está incorreta.");
+
     }
 
     public void insereNome(String nomeUsuario){

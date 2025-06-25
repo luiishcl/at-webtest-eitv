@@ -15,10 +15,13 @@ public class CadastroTest {
     private static final Logger logger = LoggerFactory.getLogger(CadastroTest.class);
 
     //Variaveis do cadastro
-    String nome = "Perrito Frozen";
-    String email = "email_05@teste.com.br";
+    String nome = "Perrito Kin";
+    String email = "email_06@teste.com.br";
     String senha = "123Pass@";
     String cadastroTitulo = "CRIAR USUÁRIO";
+    String msgEmailErro = "não é válido";
+    String msgSenhaErro = "é muito curto (mínimo: 6 caracteres)";
+    String msgConfSenhaErro = "não pode ficar em branco, não está de acordo com a confirmação";
 
     @BeforeEach
     public void setup(){
@@ -35,7 +38,7 @@ public class CadastroTest {
 
     @Test
     @DisplayName("Quando preencher o cadastro com as informações então cria um novo usuario.")
-    public void CriarUsuario() throws InterruptedException {
+    public void CriarUsuario(){
 
         //Instanciar o page objects
         CadastroPage cadastroPage = new CadastroPage(driver);
@@ -66,6 +69,28 @@ public class CadastroTest {
         //Assert verificação da mensagem de sucesso
         cadastroPage.verificarMensagem(nome);
         logger.info("Realizacao do Assert nome usuario '{}'.", nome);
+    }
+
+    @Test
+    @DisplayName("Quando tentar cadastrar com dados inválidos então não sera possivel.")
+    public void CadastroInvalido(){
+        //Instanciar o page objects
+        CadastroPage cadastroPage = new CadastroPage(driver);
+
+        //Preencher dados
+        cadastroPage.insereNome("aaa");
+        cadastroPage.insereEmail("aaa");
+        cadastroPage.insereSenha("aaa");
+        logger.info("Preenchido");
+
+        cadastroPage.scrollFinalPagina();
+        cadastroPage.checkboxCadastro();
+        cadastroPage.clicarRegistrar();
+        logger.info("Cadastro iniciando validação");
+
+        cadastroPage.verificarErrosCadastro(msgEmailErro, msgSenhaErro, msgConfSenhaErro);
+        logger.info("Validação das mensagens de erro concluida.");
+
     }
 
 }
