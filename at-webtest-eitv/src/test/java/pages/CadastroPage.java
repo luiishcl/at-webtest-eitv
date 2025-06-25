@@ -50,7 +50,6 @@ public class CadastroPage {
         this.driver = driver;
     }
 
-
     public void insereNome(String nomeUsuario){
         driver.findElement(campoPreenchimentoNome).sendKeys(nomeUsuario);
     }
