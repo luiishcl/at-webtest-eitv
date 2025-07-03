@@ -17,8 +17,8 @@ public class LoginTest {
     private static final Logger logger = LoggerFactory.getLogger(LoginTest.class);
 
     //Variaveis do Login
-    String email = "luishchagas@gmail.com";
-    String senha = "123Pass@";
+    String email = "[email]";
+    String senha = "[senha]";
     String loginTitulo = "ENTRAR";
     String loginAlerta = "Verifique os dados informados.";
 
